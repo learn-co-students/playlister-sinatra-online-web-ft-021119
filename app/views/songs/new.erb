@@ -8,7 +8,7 @@
 
   <li>
     <% @genres.each do |genre| %>
-      <input type="checkbox" name="song[genres][]" id="<%=genre.name%>" value="<%=genre.id%>"><%=genre.name%>
+        <input id="<%= genre.name %>" type="checkbox" name="genres[]" value="<%= genre.id %>">
     <% end %>
   </li>
   <!-- <input type="checkbox" id = "Hippity Hop" name="song[genres][]"><p>Hippity Hop</p>
@@ -23,5 +23,5 @@
   </li>
 
   <input type="submit" name="Create" value="Create">
-
+<h1><%= @song %></h1>
 </form>
