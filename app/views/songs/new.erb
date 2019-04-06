@@ -1,19 +1,28 @@
-<h1>Create a new artist </h1>
+<h1>Create a new song </h1>
 <form action="/songs" method="post">
   <label for="Name">Name</label>
   <br>
-  <input type="text" name="Name" id="Name" value="Name">
-<!--
+  <input type="text" name="song[name]" id="Name" value="Name">
+
+  <p>Or, create a new artist </p>
+
+  <li>
+    <% @genres.each do |genre| %>
+      <input type="checkbox" name="song[genres][]" id="<%=genre.name%>" value="<%=genre.id%>"><%=genre.name%>
+    <% end %>
+  </li>
+  <!-- <input type="checkbox" id = "Hippity Hop" name="song[genres][]"><p>Hippity Hop</p>
+  <input type="checkbox" id = "New Age Garbage" name="song[genres][]"><p>New Age Garbage:</p> -->
+  <input type="text" name="artist[name]" id = "Artist Name">
   <br>
   <p>Select an existing artist</p>
   <li>
-    <%# @artist.each do |artist| %>
-      <input type="radio" name="song[artist]" value="<%=#artist.name %>">
-    <%# end %>
+    <% @artists.each do |artist| %>
+      <input type="checkbox" name="song[artist]" id="<%=artist.name%>"><%=artist.name%>
+    <% end %>
   </li>
--->
-  <p>Or, create a new artist</p>
-  <input type="text" name="artist[name]" id = "Artist Name">
 
-<input type="submit" name="Create" value="Create">
+  <input type="submit" name="Create" value="Create">
+
+
 </form>
