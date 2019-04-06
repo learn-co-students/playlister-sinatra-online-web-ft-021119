@@ -9,21 +9,34 @@ class SongsController < ApplicationController
     erb :'songs/new'
   end
   post '/songs' do
+    # @genres = Genre.all
+    # @genres.map do |g|
+    #   g.id
+    # end
 
     genres = params[:song][:genres].map {|g| g.to_i}
-    binding.pry
+    @genres = Genre.find_by_id(genres)
+
+
     song = Song.create(name: params[:song][:name])
-    binding.pry
-    song.genres = genres
+    song.genres << @genres
     if !params[:artist][:name].empty?
-        new_artist = Artist.create(name: params[:artist][:name])
+        new_artist = Artist.create(name: params[:artist][:name]) unless Artist.find_by(name: params[:artist][:name])
         song.artist = new_artist
+        song.save
+    else
+
+      existing_artist = Artist.find_by(name: params[:artist][:name])
+      song.artist = existing_artist
+      song.save
     end
-    song.save
-    binding.pry
+
+
+
     redirect "/songs/#{song.slug}"
   end
   get '/songs/:slug' do
+    binding.pry
     @song = Song.find_by_slug(params[:slug])
     erb :'/songs/show'
   end

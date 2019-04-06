@@ -18,11 +18,10 @@
   <p>Select an existing artist</p>
   <li>
     <% @artists.each do |artist| %>
-      <input type="checkbox" name="song[artist]" id="<%=artist.name%>"><%=artist.name%>
+      <input type="checkbox" name="[artist][name]" id="<%=artist.name%>" value="<%=artist.id%>"><%=artist.name%>
     <% end %>
   </li>
 
   <input type="submit" name="Create" value="Create">
-
 
 </form>
