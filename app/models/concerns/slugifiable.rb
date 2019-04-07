@@ -1,7 +1,7 @@
 module Slugifiable
   module InstanceMethods
     def slug(song_name)
-      song_name.gsub(" ","-").delete(/\W/)
+      song_name.downcase.gsub(" ","-")
     end
   end
 
@@ -9,5 +9,5 @@ module Slugifiable
     def find_by_slug
     end
   end
-  
+
 end
