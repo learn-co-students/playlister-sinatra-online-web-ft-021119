@@ -11,29 +11,25 @@ class SongsController < ApplicationController
 
   get '/songs/:slug' do
     @song = Song.find_by_slug(params[:slug])
+    #binding.pry
       if @song
         @artist = @song.artist
         @genre = @song.genres
       end
-    #binding.pry
     erb :'/songs/show'
   end
 
   post '/songs/new' do
-    binding.pry
-    if !Song.where(name == params[:song])
-      @song = Song.new
-      @song.name = params[:name]
-      @song.artist = params[:artist]
-      @song.genre = params[:genre]
-      @song.save
-    end
-
-    if Artist.where(name == params[:artist])
+    @song = Song.create(name: params[:name])
+    artist_from_form = params[:artist]
+    if Artist.all.select {|artist| artist.name == params[:artist]}
+      @song.artist = artist.name
       erb :'/songs/:slug'
     else
       Artist.create_by(params[:artist])
     end
+    #binding.pry
+    erb :songs/:slug
   end
 
   get 'songs/:slug/edit' do

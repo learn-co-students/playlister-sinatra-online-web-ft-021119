@@ -1,12 +1,12 @@
-<h3>Song Name: <%= @song.name if @song %></h3>
+<h3>Song Name:</h3>
+<h1> <%= @song.name if @song %></h1>
 
-<h4>Artist Name:
   <% if @artist %>
-    <a href="/artists/<%@artist.slug%>"><%= @artist.name%></a></h4>
+    <h3>Artist Name: <a href="/artists/<%=@artist.slug%>"><%= @artist.name%></a></h3>
   <% end %>
 
   <% if @song %>
     <% @song.genres.each do |genre| %>
-      <h4>Genre Name: <a href="/genres/<%=genre.slug%>"><%= genre.name %></a> </h4>
+      <h3>Genre Name: <a href="/genres/<%=genre.slug%>"><%= genre.name %></a> </h3>
     <% end %>
   <% end %>
