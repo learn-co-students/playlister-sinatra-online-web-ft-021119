@@ -4,12 +4,9 @@ class Artist < ActiveRecord::Base
   # extend Slugifiable::ClassMethods
   # include Slugifiable::InstanceMethods
 
-
   def slug
     @slug = self.name.strip.downcase.gsub(" ","-")
   end
-
-
 
   def self.find_by_slug(slug)
     name = "#{slug.gsub("-"," ")}".split.map(&:capitalize).join(" ")
