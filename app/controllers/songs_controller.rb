@@ -14,20 +14,21 @@ class SongsController < ApplicationController
     # @genres.map do |g|
     #   g.id
     # end
-
-    genres = params[:genres].map {|g| g.to_i}
-    @genres = Genre.find_by_id(genres)
+    # need to account if genre isn't picked
+    @genres = params[:genres].map {|g| Genre.find_or_create_by(name: g)}
 
     @song = Song.create(name: params[:song][:name])
     @song.genres << @genres
-    if !params[:artist][:name].empty?
-        new_artist = Artist.create(name: params[:artist][:name]) unless Artist.find_by(name: params[:artist][:name])
-        @song.artist = new_artist
-    else
-      existing_artist = Artist.find_by(name: params[:artist][:name])
-      @song.artist = existing_artist
-
-    end
+    @song.artist = Artist.find_or_create_by(name: params[:artist][:name])
+    # if !params[:artist][:name].empty?
+    #     new_artist = Artist.create(name: params[:artist][:name]) unless Artist.find_by(name: params[:artist][:name])
+    #     @song.artist = new_artist
+    #
+    # else
+    #   existing_artist = Artist.find_by(name: params[:artist][:name])
+    #   @song.artist = existing_artist
+    #
+    # end
         @song.save
     redirect "/songs/#{@song.slug}"
   end
