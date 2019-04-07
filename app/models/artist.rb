@@ -12,14 +12,8 @@ class Artist < ActiveRecord::Base
 
 
   def self.find_by_slug(slug)
-    artist_name = "#{slug.gsub("-"," ")}".split.map(&:capitalize).join(" ")
-
-    self..each do |artist|
-      if artist.name == artist_name
-        @artist = artist
-              #binding.pry
-      end
-    end
+    name = "#{slug.gsub("-"," ")}".split.map(&:capitalize).join(" ")
+    self.all.detect {|name| name.slug == slug}
   end
 
 end
