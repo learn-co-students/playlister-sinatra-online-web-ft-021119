@@ -20,15 +20,19 @@ class SongsController < ApplicationController
   end
 
   post '/songs/new' do
-    @song = Song.create(name: params[:name])
+    @song = Song.create(name: params[:name])#create with name only
+
+    #figure out if artist from form already exists in Artist.all
     artist_from_form = params[:artist]
-    if Artist.all.select {|artist| artist.name == params[:artist]}
-      @song.artist = artist.name
+    if Artist.find_by_name(name: artist_from_form)# if found by name
+      artist = artist.find_by_name#set artist = existing object from artist class
       erb :'/songs/:slug'
     else
-      Artist.create_by(params[:artist])
+      # if not in Artist.all, create artist using form entry as artist name
+      artist = Artist.create_by(name: artist_from_form)
     end
-    #binding.pry
+
+    @song.artist = artist_from_form #set new song object's artist = 
     erb :songs/:slug
   end
 
