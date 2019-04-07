@@ -8,24 +8,24 @@
 
 
   <li>
-    <% @genres.each do |genre| %>
+    <% Genre.all.each do |genre| %>
         <input id="<%= genre.name %>" type="checkbox" name="genres[]" value="<%= genre.name %>"
             <%= "checked" if @song.genres.include?(genre) %>
         ><%= genre.name %>
     <% end %>
   </li>
-  <p>Or, c`reate a new artist </p>
-  <input type="text" name="artist[name]" id = "Artist Name" value="<%= @song.artist.name %>">
+  <p>Or, create a new artist </p>
+  <input type="text" name="artist[name]" id = "Artist Name">
   <br>
   <p>Select an existing artist</p>
   <li>
-    <% @artists.each do |artist| %>
-      <input type="checkbox" name="[artist][name]" id="<%=artist.name%>" value="<%=artist.name%>"
+    <% Artist.all.each do |artist| %>
+      <input type="checkbox" name="song[artist][name]" id="<%=artist.name%>" value="<%=artist.name%>"
          <%= "checked" if @song.artist == artist %>
       ><%=artist.name%>
     <% end %>
   </li>
 
-  <input type="submit" name="Create" value="Create">
+  <input type="submit" name="Save" value="Save">
 <h1><%= @song %></h1>
 </form>
