@@ -10,34 +10,36 @@ class SongsController < ApplicationController
   end
 
   get '/songs/:slug' do
-    @song = Song.find_by_slug(params[:slug])
     #binding.pry
-      if @song
-        @artist = @song.artist
-        @genre = @song.genres
-      end
-    erb :'/songs/show'
+    @song = Song.find_by_slug(params[:slug])
+    @artist = @song.artist
+    @genre = @song.genre
+    redirect to erb :'/songs/show'
   end
 
   post '/songs/new' do
-    @song = Song.create(name: params[:name])#create with name only
+    #binding.pry
 
-    #figure out if artist from form already exists in Artist.all
-    artist_from_form = params[:artist]
-    if Artist.find_by_name(name: artist_from_form)# if found by name
-      artist = artist.find_by_name#set artist = existing object from artist class
-      erb :'/songs/:slug'
+    if !Artist.find_by(name: params[:artist][:name])
+      artist = Artist.create(name: params[:artist][:name])
+      @song = Song.create(name: params[:song][:name])#create with name only
     else
-      # if not in Artist.all, create artist using form entry as artist name
-      artist = Artist.create_by(name: artist_from_form)
+      @song = Song.create(name: params[:song][:name])#create with name only
+      @song.artist = Artist.find_by(name: params[:artist][:name])
     end
-
-    @song.artist = artist_from_form #set new song object's artist = 
-    erb :songs/:slug
+    redirect to erb :"/songs/#{song.slug}"
   end
 
   get 'songs/:slug/edit' do
-    erb :'/songs/edit'
+    @song
+    erb :"/songs/#{@song.slug}/edit"
   end
+
+  patch 'songs/:slug/edit' do
+    @song.artist = params[:song][:artist] if params[:song][:artist]
+    @song.genre = params[:song][:genres] if params[:song][:genres]
+    erb :"/songs/#{@song.slug}"
+  end
+
 
 end

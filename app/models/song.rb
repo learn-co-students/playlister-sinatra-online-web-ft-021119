@@ -6,12 +6,12 @@ class Song < ActiveRecord::Base
   # include Slugifiable::InstanceMethods
 
   def slug
-    @slug = self.name.strip.downcase.gsub(" ","-")
+    @slug = self.name.downcase.gsub(" ","-")
   end
 
   def self.find_by_slug(slug)
     name = "#{slug.gsub("-"," ")}".split.map(&:capitalize).join(" ")
     self.all.detect {|name| name.slug == slug}
   end
-  
+
 end
