@@ -4,18 +4,13 @@
   <label for="Name">Name</label>
   <input type="text" name="song[name]" id="Name">
 
-  <h2> Choose or scroll down to create an artist for this song</h2>
+  <h2> Create an artist for this song</h2>
   <h3>Artists</h3>
 
-  <% sorted_artists = Artist.all.sort_by{|artist| artist.name.downcase}%>
-  <% sorted_artists.each do |artist| %>
-    <input id="<%= artist.name %>" type="checkbox" name="artist[name]>"
-    <label for="Artist_Name"><%= artist.name %></label>
-    <br>
-  <% end %>
+
 
   <label for="artist">Artist Name: </label>
-  <input type="text" name="artist[name]" id="Artist Name">
+  <input type="text" name="Artist Name">
 
   <br>
   <h2>Choose a genre for this song</h2>
@@ -23,8 +18,8 @@
 
   <% sorted_genres = Genre.all.sort_by{|genre| genre.name.downcase}%>
   <% sorted_genres.each do |genre| %>
-    <input id="<%= genre.name %>" type="checkbox" name="genres[]">
-    <label for="genre_name"><%= genre.name %></label>
+    <input id="<%= genre.name %>" type="checkbox" name="genres[]" value="<%= genre.id %>">
+    <label for="Genre name"><%= genre.name %></label>
     <br>
   <% end %>
 

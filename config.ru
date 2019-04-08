@@ -3,6 +3,7 @@ require './config/environment'
 begin
   fi_check_migration
 
+  #use Rack::Flash
   use Rack::MethodOverride
   use ArtistsController
   use SongsController
