@@ -10,6 +10,7 @@ begin
   use GenresController
 
   run ApplicationController
+
 rescue ActiveRecord::PendingMigrationError => err
   STDERR.puts err
   exit 1
