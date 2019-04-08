@@ -14,5 +14,5 @@ class Genre < ActiveRecord::Base
       x.slug == name
     end
   end
-  
+
 end

@@ -16,8 +16,6 @@ class SongsController < ApplicationController
   end
 
   post '/songs' do
-    #binding.pry
-
     if !Artist.find_by(name: params[:artist][:name])
       artist = Artist.create(name: params[:artist][:name])
       @song = Song.create(name: params[:song][:name])#create with name only
@@ -26,13 +24,12 @@ class SongsController < ApplicationController
       @song = Song.create(name: params[:song][:name])#create with name only
       @song.artist = Artist.find_by(name: params[:artist][:name])
     end
-
     redirect "/songs/#{@song.slug}"
   end
 
   get 'songs/:slug/edit' do
     @song
-    erb :"/songs/#{@song.slug}/edit"
+    erb :"/songs/edit"
   end
 
   patch 'songs/:slug/edit' do
