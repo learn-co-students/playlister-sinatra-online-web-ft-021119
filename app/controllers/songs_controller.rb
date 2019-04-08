@@ -12,22 +12,22 @@ class SongsController < ApplicationController
   get '/songs/:slug' do
     #binding.pry
     @song = Song.find_by_slug(params[:slug])
-    @artist = @song.artist
-    @genre = @song.genre
-    redirect to erb :'/songs/show'
+    erb :'/songs/show'
   end
 
-  post '/songs/new' do
+  post '/songs' do
     #binding.pry
 
     if !Artist.find_by(name: params[:artist][:name])
       artist = Artist.create(name: params[:artist][:name])
       @song = Song.create(name: params[:song][:name])#create with name only
+      @song.artist = artist
     else
       @song = Song.create(name: params[:song][:name])#create with name only
       @song.artist = Artist.find_by(name: params[:artist][:name])
     end
-    redirect to erb :"/songs/#{song.slug}"
+
+    redirect "/songs/#{@song.slug}"
   end
 
   get 'songs/:slug/edit' do
