@@ -1,4 +1,4 @@
-# Sinatra Playlister
+<!-- # Sinatra Playlister
 
 ## Objectives
 
@@ -16,9 +16,9 @@ this lab, you'll be:
 1.  Giving our "library" of songs a dynamic web interface
 
 2.  Creating a few complex forms that allow you to create and edit Artists,
-    Songs and Genres.
+    Songs and Genres. -->
 
-## File Structure
+<!-- ## File Structure
 
 Your application should use the following file structure. Notice how there are
 separate controllers for songs, artists, and genres. Separately, we have
@@ -52,7 +52,7 @@ sub-directories for views for songs, artists, and genres.
 │           ├── index.erb
 │           ├── new.erb
 │           └── show.erb
-```
+``` -->
 
 ## Instructions
 
