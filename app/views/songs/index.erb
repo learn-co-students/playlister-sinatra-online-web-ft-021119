@@ -1,0 +1,7 @@
+<h1>Songs</h1>
+
+<%@songs.each_with_index do |song, i|%>
+  <%number = i + 1%>
+  <a href="/songs/<%=song.slug%>"> <%="#{number}. #{song.name}"%> </a>
+  <br>
+<%end%>
